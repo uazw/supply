@@ -7,4 +7,4 @@ trap 'docker compose down --remove-orphans' 0
 
 DEFAULT_CMD=(./gradlew bootRun)
 
-docker compose run --rm dev "${@-${DEFAULT_CMD[@]}}"
+docker compose run --service-ports --rm dev "${@-${DEFAULT_CMD[@]}}"

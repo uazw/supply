@@ -66,6 +66,7 @@ dependencies {
   implementation("org.springframework.boot:spring-boot-starter-actuator")
   implementation("org.springframework.boot:spring-boot-starter-data-jpa")
   implementation("org.springframework.boot:spring-boot-starter-web")
+  implementation("org.springdoc:springdoc-openapi-starter-webmvc-ui:2.8.8")
   implementation("com.zaxxer:HikariCP:6.3.0")
   implementation("io.vavr:vavr:0.10.5")
   implementation("org.flywaydb:flyway-core")

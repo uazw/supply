@@ -2,8 +2,6 @@ services:
   base:
     image: 639347700193.dkr.ecr.ap-southeast-2.amazonaws.com/resi-lob/jdk21-eclipse-temurin
     working_dir: /app
-    ports:
-      - "8080:8080"
     volumes:
       - .:/app
       - gradle-cache:/root/.gradle
@@ -13,7 +11,7 @@ services:
     environment:
       SPRING_PROFILES_ACTIVE: dev
     ports:
-      - "8080:8080"
+      - 8080:8080
     command: ./gradlew bootRun
     depends_on:
       - db-dev
