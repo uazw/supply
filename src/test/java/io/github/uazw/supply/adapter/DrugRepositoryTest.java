@@ -2,6 +2,8 @@ package io.github.uazw.supply.adapter;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
+import io.github.uazw.supply.domain.model.DrugId;
+import io.vavr.collection.List;
 import jakarta.transaction.Transactional;
 import java.time.Instant;
 import org.junit.jupiter.api.Test;
@@ -64,5 +66,26 @@ class DrugRepositoryTest {
 
     var drug = drugRepository.findBy("hello", "world");
     assertThat(drug.get().getStocks().size()).isEqualTo(1);
+  }
+
+  @Test
+  @Transactional
+  void shouldAbleToReturnDrugById() {
+
+    var createdDrug = drugRepository.create("hello", "world");
+    var anotherCreatedDrug = drugRepository.create("konichiwaa", "sekai");
+
+    var drugs = drugRepository.findBy(List.of(createdDrug.getId(), anotherCreatedDrug.getId()));
+
+    assertThat(drugs.size()).isEqualTo(2);
+  }
+
+  @Test
+  @Transactional
+  void shouldReturnEmptyDrugIfDrugDoNotExists() {
+
+    var drugs = drugRepository.findBy(List.of(new DrugId(123312L)));
+
+    assertThat(drugs.size()).isEqualTo(0);
   }
 }

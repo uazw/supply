@@ -1,0 +1,4 @@
+POST http://localhost:8080/drug
+Content-Type: application/json
+
+{"name": "asdf", "manufacturer": "abc", "batchNumber": "sdf", "expiredDate": "2025-05-22T10:10:10Z", "stock": 234}
