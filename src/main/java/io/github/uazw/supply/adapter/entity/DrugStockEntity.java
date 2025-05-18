@@ -16,24 +16,24 @@ public final class DrugStockEntity {
   @Id
   @GeneratedValue(strategy = GenerationType.IDENTITY)
   @Column(columnDefinition = "serial")
-  private Long id;
+  private long id;
   @Column(name = "drug_id")
-  private Long drugId;
+  private long drugId;
   private String batchNumber;
   private Instant expiredDate;
-  private Long stock;
-  private Long remaining;
+  private long stock;
+  private long remaining;
 
   public DrugStockEntity() {
   }
 
   public DrugStockEntity(
-      Long id,
-      Long drugId,
+      long id,
+      long drugId,
       String batchNumber,
       Instant expiredDate,
-      Long stock,
-      Long remaining) {
+      long stock,
+      long remaining) {
     this.id = id;
     this.drugId = drugId;
     this.batchNumber = batchNumber;
@@ -51,19 +51,19 @@ public final class DrugStockEntity {
         drugStock.expiredDate(), drugStock.stock(), drugStock.remaining());
   }
 
-  public Long getId() {
+  public long getId() {
     return id;
   }
 
-  public void setId(Long id) {
+  public void setId(long id) {
     this.id = id;
   }
 
-  public Long getDrugId() {
+  public long getDrugId() {
     return drugId;
   }
 
-  public void setDrugId(Long drugId) {
+  public void setDrugId(long drugId) {
     this.drugId = drugId;
   }
 
@@ -83,19 +83,19 @@ public final class DrugStockEntity {
     this.expiredDate = expiredDate;
   }
 
-  public Long getStock() {
+  public long getStock() {
     return stock;
   }
 
-  public void setStock(Long stock) {
+  public void setStock(long stock) {
     this.stock = stock;
   }
 
-  public Long getRemaining() {
+  public long getRemaining() {
     return remaining;
   }
 
-  public void setRemaining(Long remaining) {
+  public void setRemaining(long remaining) {
     this.remaining = remaining;
   }
 }

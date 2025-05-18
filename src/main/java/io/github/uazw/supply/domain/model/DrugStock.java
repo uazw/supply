@@ -3,19 +3,19 @@ package io.github.uazw.supply.domain.model;
 import java.time.Instant;
 
 public final class DrugStock {
-  private Long id;
+  private long id;
   private final DrugId drugId;
   private final String batchNumber;
   private final Instant expiredDate;
-  private final Long stock;
-  private final Long remaining;
+  private final long stock;
+  private final long remaining;
 
   public DrugStock(
       DrugId drugId,
       String batchNumber,
       Instant expiredDate,
-      Long stock,
-      Long remaining) {
+      long stock,
+      long remaining) {
     this.drugId = drugId;
     this.batchNumber = batchNumber;
     this.expiredDate = expiredDate;
@@ -23,8 +23,8 @@ public final class DrugStock {
     this.remaining = remaining;
   }
 
-  public DrugStock(Long id, DrugId drugId, String batchNumber, Instant expiredDate, Long stock,
-                   Long remaining) {
+  public DrugStock(long id, DrugId drugId, String batchNumber, Instant expiredDate, long stock,
+                   long remaining) {
     this.drugId = drugId;
     this.batchNumber = batchNumber;
     this.expiredDate = expiredDate;
@@ -33,7 +33,7 @@ public final class DrugStock {
     this.id = id;
   }
 
-  public Long id() {
+  public long id() {
     return id;
   }
 
@@ -49,11 +49,11 @@ public final class DrugStock {
     return expiredDate;
   }
 
-  public Long stock() {
+  public long stock() {
     return stock;
   }
 
-  public Long remaining() {
+  public long remaining() {
     return remaining;
   }
 

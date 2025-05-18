@@ -16,7 +16,7 @@ public class Drug {
     this.stocks = stocks;
   }
 
-  public void inventory(String batchNumber, Instant expiredDate, Long stock) {
+  public void inventory(String batchNumber, Instant expiredDate, long stock) {
     this.stocks = this.stocks.append(new DrugStock(id, batchNumber, expiredDate, stock, stock));
   }
 

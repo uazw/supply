@@ -1,6 +1,7 @@
 package io.github.uazw.supply.domain;
 
 import io.github.uazw.supply.domain.model.Drug;
+import jakarta.transaction.Transactional;
 import java.time.Instant;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -15,8 +16,9 @@ public class DrugService {
     this.drugPort = drugPort;
   }
 
+  @Transactional
   public void inventory(String name, String manufacturer, String batchNumber, Instant expiredDate,
-                        Long stock) {
+                        long stock) {
     Drug drug =
         drugPort.findBy(name, manufacturer).getOrElse(() -> drugPort.create(name, manufacturer));
     drug.inventory(batchNumber, expiredDate, stock);

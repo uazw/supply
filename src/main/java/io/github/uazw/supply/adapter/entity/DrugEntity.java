@@ -22,7 +22,7 @@ public class DrugEntity {
   @Id
   @GeneratedValue(strategy = GenerationType.IDENTITY)
   @Column(columnDefinition = "serial")
-  private Long id;
+  private long id;
   private String name;
   private String manufacturer;
   @OneToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
@@ -38,7 +38,7 @@ public class DrugEntity {
     this.drugStockEntities = new ArrayList<>();
   }
 
-  public DrugEntity(Long id, String name, String manufacturer,
+  public DrugEntity(long id, String name, String manufacturer,
                     List<DrugStockEntity> drugStockEntities) {
     this.id = id;
     this.name = name;
@@ -56,11 +56,11 @@ public class DrugEntity {
         io.vavr.collection.List.ofAll(drugStockEntities.stream().map(DrugStockEntity::to)));
   }
 
-  public Long getId() {
+  public long getId() {
     return id;
   }
 
-  public void setId(Long id) {
+  public void setId(long id) {
     this.id = id;
   }
 
