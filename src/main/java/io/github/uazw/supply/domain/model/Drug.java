@@ -4,17 +4,12 @@ import io.vavr.collection.List;
 import java.time.Instant;
 
 public class Drug {
-  private DrugId id;
-  private String name;
-  private String manufacturer;
-  private List<DrugStock> stocks;
-
-  public Drug() {
-    this.stocks = List.of();
-  }
+  private final DrugId id;
+  private final String name;
+  private final String manufacturer;
+  private List<DrugStock> stocks = List.of();
 
   public Drug(DrugId id, String name, String manufacturer, List<DrugStock> stocks) {
-
     this.id = id;
     this.name = name;
     this.manufacturer = manufacturer;

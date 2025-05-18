@@ -77,6 +77,7 @@ dependencies {
   testImplementation("org.testcontainers:postgresql:1.20.4")
   testRuntimeOnly("org.junit.platform:junit-platform-launcher")
   testImplementation("org.springframework.restdocs:spring-restdocs-mockmvc")
+  testImplementation("org.mockito:mockito-core:5.+")
 }
 
 tasks.withType<Test> {
