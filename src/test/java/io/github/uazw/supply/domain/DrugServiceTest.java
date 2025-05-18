@@ -20,7 +20,7 @@ class DrugServiceTest {
     var mockDrugPort = mock(DrugPort.class);
     var name = "name";
     var manufacturer = "manufacturer";
-    var drug = new Drug(new DrugId(123L), name, manufacturer, List.of());
+    var drug = new Drug(DrugId.from(123L), name, manufacturer, List.of());
     when(mockDrugPort.findBy(name, manufacturer)).thenReturn(Option.of(drug));
     var drugService = new DrugService(mockDrugPort);
 
