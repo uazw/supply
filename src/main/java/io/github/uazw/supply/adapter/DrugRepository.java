@@ -4,10 +4,10 @@ import io.github.uazw.supply.adapter.entity.DrugEntity;
 import io.github.uazw.supply.domain.DrugPort;
 import io.github.uazw.supply.domain.model.Drug;
 import io.vavr.control.Option;
+import java.util.Optional;
 import org.springframework.data.repository.CrudRepository;
 import org.springframework.stereotype.Repository;
 
-import java.util.Optional;
 
 @Repository
 public interface DrugRepository extends DrugPort, CrudRepository<DrugEntity, Long> {

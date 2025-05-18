@@ -2,8 +2,12 @@ package io.github.uazw.supply.adapter.entity;
 
 import io.github.uazw.supply.domain.model.DrugId;
 import io.github.uazw.supply.domain.model.DrugStock;
-import jakarta.persistence.*;
-
+import jakarta.persistence.Column;
+import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+import jakarta.persistence.Id;
+import jakarta.persistence.Table;
 import java.time.Instant;
 
 @Entity
@@ -43,7 +47,8 @@ public final class DrugStockEntity {
   }
 
   public static DrugStockEntity from(DrugStock drugStock) {
-    return new DrugStockEntity(drugStock.id(), drugStock.drugId().id(), drugStock.batchNumber(), drugStock.expiredDate(), drugStock.stock(), drugStock.remaining());
+    return new DrugStockEntity(drugStock.id(), drugStock.drugId().id(), drugStock.batchNumber(),
+        drugStock.expiredDate(), drugStock.stock(), drugStock.remaining());
   }
 
   public Long getId() {

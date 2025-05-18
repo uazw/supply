@@ -1,7 +1,6 @@
 package io.github.uazw.supply.domain.model;
 
 import io.vavr.collection.List;
-
 import java.time.Instant;
 
 public class Drug {

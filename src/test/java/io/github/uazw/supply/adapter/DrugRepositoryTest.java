@@ -1,7 +1,5 @@
 package io.github.uazw.supply.adapter;
 
-import io.github.uazw.supply.domain.model.DrugStock;
-import io.vavr.collection.List;
 import jakarta.transaction.Transactional;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;

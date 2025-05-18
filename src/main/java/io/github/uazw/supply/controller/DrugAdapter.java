@@ -16,6 +16,7 @@ public class DrugAdapter {
   }
 
   public void create(CreateDrugRequest request) {
-    drugService.inventory(request.name(), request.manufacturer(), request.batchNumber(), request.expiredDate(), request.stock());
+    drugService.inventory(request.name(), request.manufacturer(), request.batchNumber(),
+        request.expiredDate(), request.stock());
   }
 }

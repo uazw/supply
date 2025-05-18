@@ -23,7 +23,8 @@ public final class DrugStock {
     this.remaining = remaining;
   }
 
-  public DrugStock(Long id, DrugId drugId, String batchNumber, Instant expiredDate, Long stock, Long remaining) {
+  public DrugStock(Long id, DrugId drugId, String batchNumber, Instant expiredDate, Long stock,
+                   Long remaining) {
     this.drugId = drugId;
     this.batchNumber = batchNumber;
     this.expiredDate = expiredDate;
