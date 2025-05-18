@@ -14,12 +14,16 @@ public class Drug {
     this.stocks = List.of();
   }
 
-  public Drug(DrugId drugId, String name, String manufacturer, List<DrugStock> drugStockStream) {
+  public Drug(DrugId id, String name, String manufacturer, List<DrugStock> stocks) {
 
+    this.id = id;
+    this.name = name;
+    this.manufacturer = manufacturer;
+    this.stocks = stocks;
   }
 
   public void inventory(String batchNumber, Instant expiredDate, Long stock) {
-    this.stocks = this.stocks.append(new DrugStock(batchNumber, expiredDate, stock, stock));
+    this.stocks = this.stocks.append(new DrugStock(id, batchNumber, expiredDate, stock, stock));
   }
 
   public DrugId getId() {
@@ -38,7 +42,4 @@ public class Drug {
     return stocks;
   }
 
-  public Drug(List<DrugStock> stocks) {
-    this.stocks = stocks;
-  }
 }

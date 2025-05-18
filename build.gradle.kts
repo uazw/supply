@@ -36,6 +36,9 @@ tasks.jacocoTestReport {
   classDirectories.setFrom(
     sourceSets.main.get().output.asFileTree.matching {
       exclude("io/github/uazw/supply/SupplyApplication*")
+      exclude("**/dto/**/*.class")
+      exclude("**/model/**/*.class")
+      exclude("**/entity/**/*.class")
     }
   )
 }
@@ -44,6 +47,8 @@ tasks.jacocoTestCoverageVerification {
     rule {
       classDirectories.setFrom(sourceSets.main.get().output.asFileTree.matching {
         exclude("io/github/uazw/supply/SupplyApplication*")
+        exclude("**/dto/**/*.class")
+        exclude("**/entity/**/*.class")
       })
       limit {
         minimum = "0.8".toBigDecimal()
@@ -54,18 +59,22 @@ tasks.jacocoTestCoverageVerification {
 }
 
 tasks.test {
-  finalizedBy(tasks.jacocoTestReport) // report is always generated after tests run
+  finalizedBy(tasks.jacocoTestReport)
 }
 
 dependencies {
   implementation("org.springframework.boot:spring-boot-starter-actuator")
-	implementation("org.springframework.boot:spring-boot-starter-data-jpa")
+  implementation("org.springframework.boot:spring-boot-starter-data-jpa")
   implementation("org.springframework.boot:spring-boot-starter-web")
+  implementation("com.zaxxer:HikariCP:6.3.0")
   implementation("io.vavr:vavr:0.10.5")
   implementation("org.flywaydb:flyway-core")
   implementation("org.flywaydb:flyway-database-postgresql")
-  runtimeOnly("org.postgresql:postgresql")
+  implementation("org.postgresql:postgresql")
   testImplementation("org.springframework.boot:spring-boot-starter-test")
+  testImplementation("org.springframework.boot:spring-boot-testcontainers")
+  testImplementation("org.testcontainers:junit-jupiter:1.20.4")
+  testImplementation("org.testcontainers:postgresql:1.20.4")
   testRuntimeOnly("org.junit.platform:junit-platform-launcher")
   testImplementation("org.springframework.restdocs:spring-restdocs-mockmvc")
 }

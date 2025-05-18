@@ -2,27 +2,32 @@ package io.github.uazw.supply.adapter.entity;
 
 import io.github.uazw.supply.domain.model.Drug;
 import io.github.uazw.supply.domain.model.DrugId;
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import org.springframework.data.annotation.Id;
+import jakarta.persistence.*;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Entity
+@Table(name = "drug")
 public class DrugEntity {
 
   @Id
-  @GeneratedValue(strategy = GenerationType.AUTO)
+  @GeneratedValue(strategy = GenerationType.IDENTITY)
+  @Column(columnDefinition = "serial")
   private Long id;
-  private final String name;
-  private final String manufacturer;
-  private final List<DrugStockEntity> drugStockEntities;
+  private String name;
+  private String manufacturer;
+  @OneToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
+  @JoinColumn(name = "drug_id", referencedColumnName = "id")
+  private List<DrugStockEntity> drugStockEntities;
+
+  public DrugEntity() {
+  }
 
   public DrugEntity(String name, String manufacturer) {
     this.name = name;
     this.manufacturer = manufacturer;
-    this.drugStockEntities = List.of();
+    this.drugStockEntities = new ArrayList<>();
   }
 
   public DrugEntity(Long id, String name, String manufacturer, List<DrugStockEntity> drugStockEntities) {
@@ -38,5 +43,25 @@ public class DrugEntity {
 
   public Drug to() {
     return new Drug(new DrugId(id), name, manufacturer, io.vavr.collection.List.ofAll(drugStockEntities.stream().map(DrugStockEntity::to)));
+  }
+
+  public Long getId() {
+    return id;
+  }
+
+  public void setId(Long id) {
+    this.id = id;
+  }
+
+  public String getName() {
+    return name;
+  }
+
+  public String getManufacturer() {
+    return manufacturer;
+  }
+
+  public List<DrugStockEntity> getDrugStockEntities() {
+    return drugStockEntities;
   }
 }

@@ -1,0 +1,42 @@
+services:
+  base:
+    image: 639347700193.dkr.ecr.ap-southeast-2.amazonaws.com/resi-lob/jdk21-eclipse-temurin
+    working_dir: /app
+    ports:
+      - "8080:8080"
+    volumes:
+      - .:/app
+      - gradle-cache:/root/.gradle
+
+  dev:
+    extends: base
+    environment:
+      SPRING_PROFILES_ACTIVE: dev
+    ports:
+      - "8080:8080"
+    command: ./gradlew bootRun
+    depends_on:
+      - db-dev
+
+  test:
+    extends: base
+    command: ./gradlew check jacocoTestCoverageVerification
+
+  db-dev:
+    image: postgres:17
+    environment:
+      POSTGRES_USER: root
+      POSTGRES_PASSWORD: pazzword
+      POSTGRES_DB: pharma
+    ports:
+      - 5432:5432
+    volumes:
+      - db-cache:/var/lib/postgresql/data
+    healthcheck:
+      test: [ "CMD-SHELL", "pg_isready" ]
+      interval: 1s
+      timeout: 60s
+
+volumes:
+  gradle-cache:
+  db-cache:
