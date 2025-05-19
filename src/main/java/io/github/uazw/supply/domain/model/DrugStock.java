@@ -23,9 +23,6 @@ public final class DrugStock {
     this.remaining = remaining;
   }
 
-  public DrugStock withRemaining(long remaining) {
-    return new DrugStock(drugId, batchNumber, expiredDate, stock, remaining);
-  }
 
   public DrugStock(long id, DrugId drugId, String batchNumber, Instant expiredDate, long stock,
                    long remaining) {
@@ -35,6 +32,10 @@ public final class DrugStock {
     this.stock = stock;
     this.remaining = remaining;
     this.id = id;
+  }
+
+  public DrugStock withRemaining(long remaining) {
+    return new DrugStock(drugId, batchNumber, expiredDate, stock, remaining);
   }
 
   public long id() {

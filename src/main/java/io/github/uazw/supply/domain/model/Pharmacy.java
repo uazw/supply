@@ -25,8 +25,8 @@ public class Pharmacy {
     var drugAndRemaining =
         contractedDrugs.toMap(ContractedDrug::getDrugId, ContractedDrug::getRemaining);
     return drugs.forAll(
-        drugWithCount -> drugAndRemaining.getOrElse(drugWithCount.id(), 0L) >=
-            drugWithCount.count()
+        drugWithCount -> drugAndRemaining.getOrElse(drugWithCount.id(), 0L)
+            >= drugWithCount.count()
     );
 
   }

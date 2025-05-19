@@ -12,19 +12,19 @@ import org.springframework.stereotype.Service;
 @Service
 public class PrescriptionAdapter {
 
-  private final PrescriptionService PrescriptionService;
+  private final PrescriptionService prescriptionService;
 
   @Autowired
-  public PrescriptionAdapter(PrescriptionService PrescriptionService) {
-    this.PrescriptionService = PrescriptionService;
+  public PrescriptionAdapter(PrescriptionService prescriptionService) {
+    this.prescriptionService = prescriptionService;
   }
 
   public void create(long pharmacyId, long patientId, List<DrugWithCountRequest> drugs) {
-    PrescriptionService.create(PharmacyId.from(pharmacyId), PatientId.from(patientId),
+    prescriptionService.create(PharmacyId.from(pharmacyId), PatientId.from(patientId),
         io.vavr.collection.List.ofAll(drugs.stream().map(DrugWithCountRequest::to)));
   }
 
   public void fulfill(long prescriptionId) {
-    PrescriptionService.fulfillment(PrescriptionId.from(prescriptionId));
+    prescriptionService.fulfillment(PrescriptionId.from(prescriptionId));
   }
 }

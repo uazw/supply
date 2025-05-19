@@ -17,8 +17,8 @@ public class PrescriptionController {
   private final PrescriptionAdapter prescriptionAdapter;
 
   @Autowired
-  public PrescriptionController(PrescriptionAdapter PrescriptionAdapter) {
-    this.prescriptionAdapter = PrescriptionAdapter;
+  public PrescriptionController(PrescriptionAdapter prescriptionAdapter) {
+    this.prescriptionAdapter = prescriptionAdapter;
   }
 
   @PostMapping

@@ -17,19 +17,23 @@ public interface DrugRepository extends DrugPort, CrudRepository<DrugEntity, Lon
 
   Optional<DrugEntity> findByNameAndManufacturer(String name, String manufacturer);
 
+  @Override
   default Drug create(String name,
                       String manufacturer) {
     return this.save(new DrugEntity(name, manufacturer)).to();
   }
 
+  @Override
   default Option<Drug> findBy(String name, String manufacturer) {
     return Option.ofOptional(findByNameAndManufacturer(name, manufacturer)).map(DrugEntity::to);
   }
 
+  @Override
   default void save(Drug drug) {
     this.save(DrugEntity.from(drug));
   }
 
+  @Override
   default List<Drug> findBy(List<DrugId> drugIds) {
     return List.ofAll(this.findAllById(drugIds.map(DrugId::id).asJava())).map(DrugEntity::to);
   }

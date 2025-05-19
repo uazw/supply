@@ -32,7 +32,7 @@ class PharmacyAdapterTest {
             new Pharmacy(PharmacyId.from(pharmacyId), io.vavr.collection.List.of(
                 new ContractedDrug(123L, drugId, PharmacyId.from(pharmacyId), 123L, 123L)
             ))), io.vavr.collection.List.of(
-            new Drug(drugId, drugName, manufacturer, io.vavr.collection.List.empty()))));
+              new Drug(drugId, drugName, manufacturer, io.vavr.collection.List.empty()))));
 
     var responses = pharmacyAdapter.listAll();
 
