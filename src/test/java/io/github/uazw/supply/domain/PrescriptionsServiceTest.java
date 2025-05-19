@@ -18,8 +18,9 @@ class PrescriptionServiceTest {
   void shouldDoNothingIfPharmacyNotExists() {
     var pharmacyPort = mock(PharmacyPort.class);
     var prescriptionPort = mock(PrescriptionPort.class);
+    var drugPort = mock(DrugPort.class);
     var prescriptionService =
-        new PrescriptionService(prescriptionPort, pharmacyPort);
+        new PrescriptionService(prescriptionPort, pharmacyPort, drugPort);
     var patientId = PatientId.from(1L);
     var pharmacyId = PharmacyId.from(1L);
     when(pharmacyPort.findBy(pharmacyId)).thenReturn(Option.none());
@@ -33,8 +34,9 @@ class PrescriptionServiceTest {
   void shouldDoNothingIfPharmacyUnableToOffer() {
     var pharmacyPort = mock(PharmacyPort.class);
     var prescriptionPort = mock(PrescriptionPort.class);
+    var drugPort = mock(DrugPort.class);
     var prescriptionService =
-        new PrescriptionService(prescriptionPort, pharmacyPort);
+        new PrescriptionService(prescriptionPort, pharmacyPort, drugPort);
     var patientId = PatientId.from(1L);
     var pharmacyId = PharmacyId.from(1L);
     var pharmacy = mock(Pharmacy.class);
@@ -50,8 +52,9 @@ class PrescriptionServiceTest {
   void shouldOnlyCreatePrescriptionIfRemaining() {
     var pharmacyPort = mock(PharmacyPort.class);
     var prescriptionPort = mock(PrescriptionPort.class);
+    var drugPort = mock(DrugPort.class);
     var prescriptionService =
-        new PrescriptionService(prescriptionPort, pharmacyPort);
+        new PrescriptionService(prescriptionPort, pharmacyPort, drugPort);
     var patientId = PatientId.from(1L);
     var pharmacyId = PharmacyId.from(1L);
     var pharmacy = mock(Pharmacy.class);

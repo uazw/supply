@@ -3,6 +3,7 @@ package io.github.uazw.supply.controller;
 import io.github.uazw.supply.controller.dto.CreatePrescriptionRequest;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -24,5 +25,11 @@ public class PrescriptionController {
   @ResponseStatus(HttpStatus.CREATED)
   public void create(@RequestBody CreatePrescriptionRequest request) {
     prescriptionAdapter.create(request.pharmacyId(), request.patientId(), request.drugs());
+  }
+
+  @PostMapping("/{id}")
+  @ResponseStatus(HttpStatus.CREATED)
+  public void create(@PathVariable("id") long id) {
+    prescriptionAdapter.fulfill(id);
   }
 }

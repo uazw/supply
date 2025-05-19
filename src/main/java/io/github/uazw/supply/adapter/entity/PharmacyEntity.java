@@ -34,6 +34,17 @@ public class PharmacyEntity {
     this.contractedDrugs = contractedDrugs;
   }
 
+  public PharmacyEntity(long id, List<ContractedDrugEntity> contractedDrugs) {
+    this.id = id;
+    this.contractedDrugs = contractedDrugs;
+  }
+
+  public static PharmacyEntity from(Pharmacy pharmacy) {
+    return new PharmacyEntity(pharmacy.getId().id(),
+        pharmacy.getContractedDrugs().map(ContractedDrugEntity::from).toJavaList());
+
+  }
+
   public Pharmacy to() {
     return new Pharmacy(PharmacyId.from(id),
         io.vavr.collection.List.ofAll(contractedDrugs.stream().map(ContractedDrugEntity::to)));

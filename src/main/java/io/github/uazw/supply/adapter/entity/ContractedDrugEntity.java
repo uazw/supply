@@ -34,8 +34,18 @@ public class ContractedDrugEntity {
     this.remaining = remaining;
   }
 
+  public ContractedDrugEntity(long id, long drugId, long pharmacyId, long allocated,
+                              long remaining) {
+    this.id = id;
+    this.drugId = drugId;
+    this.pharmacyId = pharmacyId;
+    this.allocated = allocated;
+    this.remaining = remaining;
+  }
+
   public ContractedDrug to() {
-    return new ContractedDrug(id, DrugId.from(drugId), PharmacyId.from(pharmacyId), allocated, remaining);
+    return new ContractedDrug(id, DrugId.from(drugId), PharmacyId.from(pharmacyId), allocated,
+        remaining);
   }
 
   public long getId() {
@@ -76,5 +86,11 @@ public class ContractedDrugEntity {
 
   public void setPharmacyId(long pharmacyId) {
     this.pharmacyId = pharmacyId;
+  }
+
+  public static ContractedDrugEntity from(ContractedDrug contractedDrug) {
+    return new ContractedDrugEntity(contractedDrug.getId(), contractedDrug.getDrugId().id(),
+        contractedDrug.getPharmacyId().id(), contractedDrug.getAllocated(),
+        contractedDrug.getRemaining());
   }
 }

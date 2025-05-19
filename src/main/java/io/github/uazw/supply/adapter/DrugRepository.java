@@ -33,4 +33,9 @@ public interface DrugRepository extends DrugPort, CrudRepository<DrugEntity, Lon
   default List<Drug> findBy(List<DrugId> drugIds) {
     return List.ofAll(this.findAllById(drugIds.map(DrugId::id).asJava())).map(DrugEntity::to);
   }
+
+  @Override
+  default void saveAll(List<Drug> drugs) {
+    this.saveAll(drugs.map(DrugEntity::from));
+  }
 }

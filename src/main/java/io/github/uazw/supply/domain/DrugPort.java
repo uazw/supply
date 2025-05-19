@@ -14,4 +14,6 @@ public interface DrugPort {
   void save(Drug drug);
 
   List<Drug> findBy(List<DrugId> drugIds);
+
+  void saveAll(List<Drug> drugs);
 }

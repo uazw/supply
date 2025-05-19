@@ -9,4 +9,6 @@ public interface PharmacyPort {
   List<Pharmacy> listAll();
 
   Option<Pharmacy> findBy(PharmacyId pharmacyId);
+
+  Pharmacy save(Pharmacy pharmacy);
 }

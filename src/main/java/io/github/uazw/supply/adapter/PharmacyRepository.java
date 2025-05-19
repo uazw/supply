@@ -22,4 +22,9 @@ public interface PharmacyRepository extends PharmacyPort, CrudRepository<Pharmac
   default Option<Pharmacy> findBy(PharmacyId pharmacyId) {
     return Option.ofOptional(this.findById(pharmacyId.id())).map(PharmacyEntity::to);
   }
+
+  @Override
+  default Pharmacy save(Pharmacy pharmacy) {
+    return this.save(PharmacyEntity.from(pharmacy)).to();
+  }
 }

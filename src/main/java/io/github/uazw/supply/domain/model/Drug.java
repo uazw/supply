@@ -2,6 +2,7 @@ package io.github.uazw.supply.domain.model;
 
 import io.vavr.collection.List;
 import java.time.Instant;
+import java.util.ArrayList;
 
 public class Drug {
   private final DrugId id;
@@ -36,4 +37,24 @@ public class Drug {
     return stocks;
   }
 
+  public boolean dispense(Long count) {
+    var partition = this.stocks.partition(
+        stock -> stock.expiredDate().isAfter(Instant.now()) && stock.remaining() > 0);
+
+    var total = count;
+    var drugStocks = new ArrayList<DrugStock>();
+
+    for (var drugStock : partition._1().sortBy(DrugStock::expiredDate)) {
+      if (total >= drugStock.remaining()) {
+        drugStocks.add(drugStock.withRemaining(0));
+        total -= drugStock.remaining();
+      } else {
+        drugStocks.add(drugStock.withRemaining(drugStock.remaining() - total));
+        total = 0L;
+      }
+    }
+    this.stocks = partition._2().appendAll(drugStocks);
+
+    return total <= 0;
+  }
 }

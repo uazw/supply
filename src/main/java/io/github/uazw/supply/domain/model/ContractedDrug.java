@@ -16,6 +16,11 @@ public class ContractedDrug {
     this.remaining = remaining;
   }
 
+  public ContractedDrug withRemaining(long remaining) {
+    return new ContractedDrug(id, drugId, pharmacyId, allocated, remaining);
+  }
+
+
   public long getAllocated() {
     return allocated;
   }

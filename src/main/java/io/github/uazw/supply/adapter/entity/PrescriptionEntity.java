@@ -1,9 +1,9 @@
 package io.github.uazw.supply.adapter.entity;
 
 import io.github.uazw.supply.domain.model.PatientId;
-import io.github.uazw.supply.domain.model.PrescriptionId;
-import io.github.uazw.supply.domain.model.Prescription;
 import io.github.uazw.supply.domain.model.PharmacyId;
+import io.github.uazw.supply.domain.model.Prescription;
+import io.github.uazw.supply.domain.model.PrescriptionId;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -33,6 +33,20 @@ public class PrescriptionEntity {
     this.patientId = patientId;
     this.pharmacyId = pharmacyId;
     this.drugs = drugs;
+  }
+
+  public PrescriptionEntity(long patientId, long pharmacyId, List<DrugWithCountEntity> drugs,
+                            long id) {
+    this.patientId = patientId;
+    this.pharmacyId = pharmacyId;
+    this.drugs = drugs;
+    this.id = id;
+  }
+
+  public static PrescriptionEntity from(Prescription prescription) {
+    return new PrescriptionEntity(prescription.patientId().id(), prescription.pharmacyId().id(),
+        prescription.drugs().map(DrugWithCountEntity::from).toJavaList(),
+        prescription.prescriptionId().id());
   }
 
   public Prescription to() {
