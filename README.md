@@ -32,3 +32,5 @@ http://localhost:8080/swagger-ui.html
 ```
 
 ## Assumptions
+
+* auditing is not part of business rule, it's unnecessary to create service for it.

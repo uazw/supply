@@ -18,13 +18,15 @@ public class PrescriptionService {
   private final PrescriptionPort prescriptionPort;
   private final PharmacyPort pharmacyPort;
   private final DrugPort drugPort;
+  private final AuditPort auditPort;
 
   @Autowired
   public PrescriptionService(PrescriptionPort prescriptionPort, PharmacyPort pharmacyPort,
-                             DrugPort drugPort) {
+                             DrugPort drugPort, AuditPort auditPort) {
     this.prescriptionPort = prescriptionPort;
     this.pharmacyPort = pharmacyPort;
     this.drugPort = drugPort;
+    this.auditPort = auditPort;
   }
 
   @Transactional
@@ -48,22 +50,27 @@ public class PrescriptionService {
           var prescription = pharmacyPrescriptionTuple2._2();
           var pharmacy = pharmacyPrescriptionTuple2._1();
 
-          if (pharmacy.canOffer(prescription.drugs())) {
-            if (!pharmacy.dispense(prescription.drugs())) {
-              throw new InsufficientStorageException(pharmacy.getId());
-            }
-
-            var map = prescription.drugs().toMap(DrugWithCount::id, DrugWithCount::count);
-            var drugs = drugPort.findBy(List.ofAll(map.keySet()));
-            drugs.forEach((Drug drug) -> {
-              if (!drug.dispense(map.getOrElse(drug.getId(), 0L))) {
-                throw new InsufficientStorageException(drug.getId());
+          try {
+            if (pharmacy.canOffer(prescription.drugs())) {
+              if (!pharmacy.dispense(prescription.drugs())) {
+                throw new InsufficientStorageException(pharmacy.getId());
               }
-            });
 
-            drugPort.saveAll(drugs);
-            pharmacyPort.save(pharmacy);
-            prescriptionPort.save(prescription);
+              var map = prescription.drugs().toMap(DrugWithCount::id, DrugWithCount::count);
+              var drugs = drugPort.findBy(List.ofAll(map.keySet()));
+              drugs.forEach((Drug drug) -> {
+                if (!drug.dispense(map.getOrElse(drug.getId(), 0L))) {
+                  throw new InsufficientStorageException(drug.getId());
+                }
+              });
+
+              drugPort.saveAll(drugs);
+              pharmacyPort.save(pharmacy);
+              prescriptionPort.save(prescription);
+            }
+            auditPort.success(prescription);
+          } catch (Exception ex) {
+            auditPort.fail(prescription, ex.getMessage());
           }
         });
   }
