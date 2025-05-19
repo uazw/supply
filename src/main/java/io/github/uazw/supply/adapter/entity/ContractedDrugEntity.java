@@ -35,7 +35,7 @@ public class ContractedDrugEntity {
   }
 
   public ContractedDrug to() {
-    return new ContractedDrug(id, new DrugId(id), PharmacyId.from(id), allocated, remaining);
+    return new ContractedDrug(id, DrugId.from(drugId), PharmacyId.from(pharmacyId), allocated, remaining);
   }
 
   public long getId() {

@@ -19,4 +19,14 @@ public class Pharmacy {
   public PharmacyId getId() {
     return id;
   }
+
+  public boolean canOffer(List<DrugWithCount> drugs) {
+    var drugAndRemaining =
+        contractedDrugs.toMap(ContractedDrug::getDrugId, ContractedDrug::getRemaining);
+    return drugs.forAll(
+        drugWithCount -> drugAndRemaining.getOrElse(drugWithCount.id(), 0L) >=
+            drugWithCount.count()
+    );
+
+  }
 }

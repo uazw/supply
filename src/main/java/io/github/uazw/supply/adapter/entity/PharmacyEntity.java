@@ -38,4 +38,8 @@ public class PharmacyEntity {
     return new Pharmacy(PharmacyId.from(id),
         io.vavr.collection.List.ofAll(contractedDrugs.stream().map(ContractedDrugEntity::to)));
   }
+
+  public long getId() {
+    return id;
+  }
 }
