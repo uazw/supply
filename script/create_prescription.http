@@ -1,0 +1,4 @@
+POST http://localhost:8080/prescription
+Content-Type: application/json
+
+{"patientId": 123, "pharmacyId": 1, "drugs": [{"drugId": 1, "count": 1}]}

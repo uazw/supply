@@ -1,0 +1,2 @@
+GET http://localhost:8080/audit?patientId=1&pharmacyId=2&success=true
+Accept: application/json
